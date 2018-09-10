@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/Users/susie/Game/game.css" type="text/css" rel="stylesheet">
+
+    <title>Hangman</title>
+    <div id="pic">
+            <img src="/Users/susie/Game/unnamed.png"  alt="man" width="200" height="200">
+    </div>
+</head>
+<body>
+        <div class="wrapper">
+                <div>
+                    <section class="game">
+                        <article>
+                                <hgroup>
+                                        <h2>Guess the World</h2>
+                                        <h3>Type a letter</h3>
+                                        <input id="input" type="text" size="20" onfocus="this.value=''" >  
+                                        <div id="guess"></div>
+                                        <input type="button" value="Play again" onClick="window.location.reload()">
+                                </hgroup>
+          <!-- <h3>Type a letter</h3>
+        <input id="input" type="text" size="20" onfocus="this.value=''" >  
+        <div id="guess"></div>
+        <div id="remaining"></div>
+        <div id="looser"></div> -->
+                    </article>    
+                </section>
+                                <aside>
+                                    <section >
+                                        <h2>Clue</h2>
+                                        <p>Words in Spanish</p>
+                                        <p>Mexican Food</p>
+                                        <div id="remaining"></div>
+                                        <div id="looser"></div>
+                                        <div id="winner"></div>
+                                    </section>
+                                </aside>
+        
+                </div>
+            </div><!-- .wrapper -->
+
+        <script>
+           
+                var words = ["hola","tamales", "pozole", "tacos"];
+                var randomword = words[Math.floor(Math.random()*words.length)];
+                var answerArray =[];
+                // var x = event.key;
+                x = randomword.length;
+                for (var i = 0; i < randomword.length; i++) 
+                    {
+                        answerArray[i]="__";
+                    }  
+
+                    console.log(randomword); 
+                    document.getElementById("guess").textContent = answerArray;
+                    
+                    var remainingLetters = randomword.length;
+
+                    
+                   
+                        
+                        document.getElementById("input").addEventListener("keypress", function(ev){
+                        console.log(ev.key);
+                        var c = 0;
+                        var w = 0;
+                        for(var x = 0; x < randomword.length;x++)
+                        {
+                        if (ev.key === randomword.charAt(x))
+                        { 
+                        answerArray[x]=ev.key;
+                        document.getElementById("guess").textContent = answerArray;
+                        console.log("its equal!");
+                        c++;
+                        console.log(c);
+                        }
+                        }
+                        // rword = randomword.valueOf
+                        if (c===0)
+                        {
+                            remainingLetters--;
+                            document.getElementById("remaining").innerHTML = " YOU HAVE " + remainingLetters + " LETTERS LEFT ";
+                        }
+                        if(remainingLetters===0)
+                        {
+                            document.getElementById("looser").innerHTML = " YOU ARE A LOOSER ";
+                        }
+                        for(var x = 0; x < randomword.length;x++)
+                        {
+                            if (answerArray[x]!="__")
+                            {
+                                w++;
+                            }
+                        }
+                        if (w===randomword.length)
+                        {
+                            document.getElementById("winner").innerHTML = "YOU ARE A WINNER";
+                        }
+                        
+                        // else
+                        // {
+                        //     document.getElementById("winner").innerHTML = " YOU ARE A WINNER ";
+                        // }
+                      
+                        });           
+                    
+       
+  
+    
+            </script>
+</body>
+</html>
